@@ -67,6 +67,11 @@ func (s ParcelStore) GetByClient(client int) ([]Parcel, error) {
 		res = append(res, p)
 	}
 
+	err = rows.Err()
+	if err != nil {
+		return nil, err
+	}
+
 	// реализуйте чтение строк из таблицы parcel по заданному client
 	// здесь из таблицы может вернуться несколько строк
 

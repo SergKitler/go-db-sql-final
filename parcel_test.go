@@ -237,6 +237,5 @@ func TestGetByClient(t *testing.T) {
 		assert.Equal(t, parcelMap[id].Address, parcel.Address)
 		assert.Equal(t, parcelMap[id].Status, parcel.Status)
 		assert.Equal(t, parcelMap[id].CreatedAt, parcel.CreatedAt)
-
 	}
 }
