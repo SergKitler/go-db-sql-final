@@ -101,7 +101,7 @@ func (s ParcelStore) SetAddress(number int, address string) error {
 
 func (s ParcelStore) Delete(number int) error {
 	_, err := s.db.Exec("DELETE FROM parcel WHERE status = :status AND number = :number",
-		sql.Named("status", "registered"),
+		sql.Named("status", ParcelStatusRegistered),
 		sql.Named("number", number))
 	if err != nil {
 		return err
