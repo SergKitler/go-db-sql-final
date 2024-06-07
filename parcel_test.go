@@ -68,15 +68,9 @@ func TestAddGetDelete(t *testing.T) {
 		require.NoError(t, err)
 	}
 
-	parClient, err = store.Get(p)
-	if err != nil {
-		require.Equal(t, sql.ErrNoRows, err)
-	}
+	_, err = store.Get(p)
 
-	assert.Empty(t, parClient.Client)
-	assert.Empty(t, parClient.Status)
-	assert.Empty(t, parClient.Address)
-	assert.Empty(t, parClient.CreatedAt)
+	require.Error(t, err, sql.ErrNoRows)
 }
 
 // TestSetAddress проверяет обновление адреса
