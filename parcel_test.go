@@ -46,10 +46,8 @@ func TestAddGetDelete(t *testing.T) {
 	// add
 	// добавьте новую посылку в БД, убедитесь в отсутствии ошибки и наличии идентификатора
 	p, err := store.Add(parcel)
-	if err != nil {
-		require.NoError(t, err)
-		return
-	}
+
+	require.NoError(t, err)
 	assert.NotEmpty(t, p)
 
 	// get
@@ -58,15 +56,15 @@ func TestAddGetDelete(t *testing.T) {
 	parClient, err := store.Get(p)
 
 	require.NoError(t, err)
+	parcel.Number = p
 	assert.Equal(t, parcel, parClient)
 
 	// delete
 	// удалите добавленную посылку, убедитесь в отсутствии ошибки
 	// проверьте, что посылку больше нельзя получить из БД
 	err = store.Delete(p)
-	if err != nil {
-		require.NoError(t, err)
-	}
+
+	require.NoError(t, err)
 
 	_, err = store.Get(p)
 
@@ -199,7 +197,7 @@ func TestGetByClient(t *testing.T) {
 	for _, parcel := range storedParcels {
 		id := parcel.Number
 		_, ok := parcelMap[id]
-		assert.True(t, ok)
+		require.True(t, ok)
 		assert.Equal(t, parcelMap[id], parcel)
 	}
 }
